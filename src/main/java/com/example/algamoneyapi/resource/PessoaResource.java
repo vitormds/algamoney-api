@@ -25,8 +25,8 @@ import com.example.algamoneyapi.repository.PessoaRepository;
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaResource {
-@Autowired PessoaRepository pessoaRepository;
-@Autowired ApplicationEventPublisher publisher;
+@Autowired private PessoaRepository pessoaRepository;
+@Autowired private ApplicationEventPublisher publisher;
 
 	@GetMapping
 	public List<Pessoa> list(){
@@ -43,7 +43,7 @@ public class PessoaResource {
 	@PostMapping
 	public ResponseEntity<Pessoa> Criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
 		Pessoa p = pessoaRepository.save(pessoa);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoa.getCodigo()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, p.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(p);
 	}
 }

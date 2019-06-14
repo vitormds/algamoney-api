@@ -3,7 +3,7 @@ package com.example.algamoneyapi.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.annotation.Generated;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -41,7 +41,7 @@ public class Lancamento {
 	private Categoria categoria;
 	
 	@ManyToOne
-	@JoinColumn(name="codigo_categoria")
+	@JoinColumn(name="codigo_pessoa")
 	private Pessoa pessoa;
 
 	public Long getCodigo() {

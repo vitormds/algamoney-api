@@ -17,9 +17,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("roles");
+		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ROLE");
 	}
-
+	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/categorias").permitAll()

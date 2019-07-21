@@ -1,5 +1,6 @@
 package com.example.algamoneyapi.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
-
+	@Autowired
 	private AuthenticationManager authenticationManager;
 	
 	@Override
@@ -28,7 +29,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
+		endpoints.
+		tokenStore(tokenStore())
+		.authenticationManager(authenticationManager);
 	}
 	@Bean
 	public TokenStore tokenStore() {

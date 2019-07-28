@@ -19,7 +19,7 @@ CREATE TABLE usuario (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  INSERT INTO usuario (codigo, nome, email, senha) values (1, 'Administrador', 'admin@algamoney.com', '$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.');
-INSERT INTO usuario (codigo, nome, email, senha) values (2, 'Maria Sousa', 'maria@algamoney.com', '$2a$10$IOMCkZdpaxca4WruuYpHP.jDfOmqV/7ML.0jvGI0f8BHAUB.7stEK');
+INSERT INTO usuario (codigo, nome, email, senha) values (2, 'Maria Sousa', 'maria@algamoney.com', '$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.');
 
  -- Permissões de categoria
 INSERT INTO permissao (codigo, descricao) values (1, 'ROLE_CADASTRAR_CATEGORIA');

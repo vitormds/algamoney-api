@@ -1,10 +1,9 @@
 package com.example.algamoneyapi.resource;
 
-import java.util.List;
+
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -19,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.algamoneyapi.event.RecursoCriadoEvent;
 import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.LancamentoRepository;
 import com.example.algamoneyapi.repository.filter.LancamentoFilter;
+import com.example.algamoneyapi.repository.projection.ResumoLancamento;
 
 @RestController
 @RequestMapping("/lancamentos")
@@ -34,6 +33,10 @@ public class LancamentoResource {
 	@GetMapping
 	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable){
 		return lancamentoRepository.filtrar(lancamentoFilter,pageable);
+	}
+	@GetMapping(params = "resumo")
+	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable){
+		return lancamentoRepository.resumir(lancamentoFilter,pageable);
 	}
 	
 	@GetMapping("/{codigo}")

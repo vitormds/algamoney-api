@@ -49,7 +49,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 
  		criteria.select(builder.construct(ResumoLancamento.class
 				, root.get("codigo")
-				, root.get("decricao")
+				, root.get("descricao")
 				, root.get("dataVencimento")
 				, root.get("dataPagamento")
 				, root.get("valor")

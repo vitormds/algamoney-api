@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.algamoneyapi.model.Usuario;
 import com.example.algamoneyapi.repository.UsuarioRepository;
+import com.example.algamoneyapi.util.UsuarioSistema;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService{
@@ -25,7 +26,7 @@ public class AppUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
 		Usuario u = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha incorretos"));
-		return new User(email, u.getSenha(), getPermissoes(u));
+		return new UsuarioSistema(u, getPermissoes(u));
 	}
 	//Lista de permissões do usuário
 	private Collection<? extends GrantedAuthority> getPermissoes(Usuario u) {

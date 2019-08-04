@@ -10,8 +10,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.algamoneyapi.event.RecursoCriadoEvent;
 import com.example.algamoneyapi.model.Pessoa;
 import com.example.algamoneyapi.repository.PessoaRepository;
+import com.example.algamoneyapi.repository.filter.PessoaFilter;
 import com.example.algamoneyapi.service.PessoaService;
 
 
@@ -38,6 +42,13 @@ public class PessoaResource {
 	@GetMapping
 	public List<Pessoa> list(){
 		return pessoaRepository.findAll();
+	}
+	@GetMapping("/filtrar")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+	public Page<Pessoa> pesquisar(PessoaFilter filter, Pageable page){
+		
+		return  pessoaRepository.pesquisar(filter, page);
+		
 	}
 	
 	@GetMapping("/{codigo}")
